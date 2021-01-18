@@ -1,0 +1,7 @@
+version: "3"
+services:
+  python:
+    environment:
+      - HOME=/home/remote-dev
+    volumes:
+      - ~/.gitconfig:/home/remote-dev/.gitconfig
