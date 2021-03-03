@@ -1,17 +1,29 @@
-version: '3'
+version: '3.8'
+volumes:
+  db-store:
 services:
   db:
-    image: mysql
+    build: ./docker/db
     environment:
       MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: python_local
+      MYSQL_USER: user
+      MYSQL_PASSWORD: passwd
       MYSQL_PORT: 3306
+      TZ: 'Asia/Tokyo'
     ports:
       - 3306:3306
-  python:
-    build: .
-    working_dir: /home/remote-dev/work
     volumes:
-      - ./web/remote-dev/work:/home/remote-dev/work/
+      - db-store:/var/lib/mysql
+  dynamodb:
+    image: amazon/dynamodb-local
+    ports:
+      - 8000:8000
+  app:
+    build: ./docker/app
+    working_dir: /home/user/dev
+    volumes:
+      - ./dev:/home/user/dev
     environment:
       TZ: 'Asia/Tokyo'
     tty: true

@@ -4,8 +4,8 @@
     "../docker-compose.yml",
     "docker-compose.extend.yml"
   ],
-  "service": "python",
-  "workspaceFolder": "/home/remote-dev/work",
+  "service": "app",
+  "workspaceFolder": "/home/user/dev",
   "extensions": [
     "ms-python.vscode-pylance",
     "ms-python.python",
